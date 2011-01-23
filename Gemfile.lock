@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    undertexterse (0.0.1)
+    undertexter (0.0.3)
       nokogiri
       rest-client
 
@@ -29,4 +29,4 @@ DEPENDENCIES
   nokogiri
   rest-client
   rspec
-  undertexterse!
+  undertexter!

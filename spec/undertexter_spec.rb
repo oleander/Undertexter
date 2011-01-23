@@ -33,8 +33,8 @@ describe Undertexter do
     @use.each {|subtitle| subtitle.title.should_not be_empty}
   end
   
-  it "should contain the right urls" do
-    @use.each {|subtitle| subtitle.url.should match(/^http:\/\/www\.undertexter\.se\/\?p=undertext&id=\d+$/)}
+  it "should contain the right detailss" do
+    @use.each {|subtitle| subtitle.details.should match(/^http:\/\/www\.undertexter\.se\/\?p=undertext&id=\d+$/)}
   end
 end
 
@@ -62,8 +62,8 @@ describe Undertexter, "trying to search for a movie using a title" do
     @use.each{|subtitle| subtitle.title.should match(/die.*hard/i)}
   end
   
-  it "should contain the right urls, again" do
-    @use.each {|subtitle| subtitle.url.should match(/^http:\/\/www\.undertexter\.se\/\?p=undertext&id=\d+$/i)}
+  it "should contain the right detailss, again" do
+    @use.each {|subtitle| subtitle.details.should match(/^http:\/\/www\.undertexter\.se\/\?p=undertext&id=\d+$/i)}
   end
   
   it "should have a movie title" do
