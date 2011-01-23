@@ -77,4 +77,29 @@ describe Undertexter, "trying to search for a movie using a title" do
   it "should not contain movie title that starts or ends with whitespace" do
     @use.each {|subtitle| subtitle.movie_title.should_not match(/^\s+.+\s+$/)}
   end
+  
+  it "should return a direct link to the subtitle" do
+    @use.each{|subtitle| subtitle.url.should match(/http:\/\/www\.undertexter\.se\/utext\.php\?id=\d+/i)}
+  end
+  
+  it "should return the same id for every link" do
+    @use.each_with_index do |subtitle, index|
+      subtitle.url.match(/id=(\d+)/)[1].should eq(@use[index].details.match(/id=(\d+)/)[1])
+    end
+  end
+end
+
+describe Undertexter, "should work when trying to fetch some english subtitles" do  
+  it "should return at least 48 subtitles" do
+    Undertexter.should have_at_least(48).find("tt0840361", {:language => :english})
+  end
+  
+  it "should return at least 8 subtitles" do
+    Undertexter.should have_at_least(8).find("tt0840361", {:language => :swedish})
+  end
+  
+  it "should return at least 8 subtitles" do
+    Undertexter.should have_at_least(8).find("tt0840361", {:language => :strange})
+  end
+  # http://www.undertexter.se/www.php?www=http://engsub.net/?p=subtitle&id=92097
 end

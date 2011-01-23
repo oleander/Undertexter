@@ -5,13 +5,23 @@ require 'nokogiri'
 class Undertexter
   attr_accessor :raw_data, :base_details, :subtitles
   
-  def initialize
-    @base_details = "http://www.undertexter.se/?p=soek&add=arkiv&str="
+  def initialize(options)
+    @options = {
+      :language => {
+        :swedish => 'soek',
+        :english => 'eng_search'
+      }
+    }
+    
+    # If a non existing language is being used, swedish will be the default
+    lang = @options[:language][options[:language]] || @options[:language][:swedish]
+    
+    @base_details = "http://www.undertexter.se/?p=#{lang}&add=arkiv&str="
     @subtitles = []
   end
   
-  def self.find(search_string)
-    this = self.new
+  def self.find(search_string, options = {:language => :swedish})
+    this = self.new(options)
     
     # Downloading the page
     this.get(search_string)
@@ -32,7 +42,7 @@ class Undertexter
     # Example output
     # [["(1 cd)", "Nedladdningar: 11891", "Avatar (2009) PROPER DVDSCR XviD-MAXSPEED", "http://www.undertexter.se/?p=undertext&id=19751"]]
     
-    [15,12].each do |id|
+    [12,15].each do |id|
       @block = noko.css("table:nth-child(#{id}) td").to_a.reject do |inner| 
         inner.content.empty? or ! inner.content.match(/Nedladdningar/i) 
       end.map do |inner| 
@@ -45,9 +55,11 @@ class Undertexter
       
       noko.css("table:nth-child(#{id}) a").to_a.reject do |inner| 
         details = inner.attr('href')
-        inner.content.empty? or details.nil? or ! details.match(/p=undertext&id=\d+/i)
+        inner.content.empty? or details.nil? or ! details.match(/(p=undertext&id=\d+)|(p=subtitle&id=\d+)/i)
       end.map do |y| 
         [y.attr('href'), y.content.strip]
+      end.reject do |list|
+        list.last.empty?
       end.each_with_index do |value, index|
         @block[index] << value.first
         @block[index] << value.last
