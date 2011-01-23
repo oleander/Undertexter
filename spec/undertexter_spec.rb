@@ -1,12 +1,12 @@
 require 'spec_helper'
 
-describe Undertexterse do
+describe Undertexter do
   before(:all) do
-    @use = Undertexterse.find("tt0499549")
+    @use = Undertexter.find("tt0499549")
   end
   
   it "should return return at least 31 subtitles" do
-    Undertexterse.should have_at_least(31).find("tt0499549")
+    Undertexter.should have_at_least(31).find("tt0499549")
   end
   
   it "should contain cds that is of the type Fixnum" do
@@ -39,23 +39,23 @@ describe Undertexterse do
 end
 
 
-describe Undertexterse, "trying to find a non existing movie" do
+describe Undertexter, "trying to find a non existing movie" do
   it "should not return any subtitles" do
-    Undertexterse.find("some random name").count.should be(0)
+    Undertexter.find("some random name").count.should be(0)
   end
 end
 
-describe Undertexterse, "trying to search for a movie using a title" do
+describe Undertexter, "trying to search for a movie using a title" do
   before(:all) do
-    @use = Undertexterse.find("die hard")
+    @use = Undertexter.find("die hard")
   end
   
   it "should return some subtitles" do
-    Undertexterse.should have_at_least(36).find("avatar")
+    Undertexter.should have_at_least(36).find("avatar")
   end
   
   it "should return some subtitles when searching for a movie with whitespace" do
-    Undertexterse.should have_at_least(41).find("die hard")
+    Undertexter.should have_at_least(41).find("die hard")
   end
   
   it "should return the right title, again" do

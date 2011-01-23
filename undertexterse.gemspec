@@ -1,18 +1,18 @@
 # -*- encoding: utf-8 -*-
 $:.push File.expand_path("../lib", __FILE__)
-require "undertexterse/version"
+require "undertexter/version"
 
 Gem::Specification.new do |s|
-  s.name        = "undertexterse"
-  s.version     = Undertexterse::VERSION
+  s.name        = "undertexter"
+  s.version     = Undertexter::VERSION
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Linus Oleander"]
   s.email       = ["linus@oleander.nu"]
-  s.homepage    = "https://github.com/oleander/Undertexterse"
-  s.summary     = %q{An subtitle search client for undertexter.se}
-  s.description = %q{An subtitle search client to search for swedish subtitles on undertexter.se}
+  s.homepage    = "https://github.com/oleander/Undertexter"
+  s.summary     = %q{A subtitle search client for undertexter.se}
+  s.description = %q{A subtitle search client to search for swedish subtitles on undertexter.se}
 
-  s.rubyforge_project = "undertexterse"
+  s.rubyforge_project = "undertexter"
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")

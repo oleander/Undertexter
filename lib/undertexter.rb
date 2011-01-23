@@ -2,7 +2,7 @@ require 'rest-client'
 require 'subtitle'
 require 'nokogiri'
 
-class Undertexterse
+class Undertexter
   attr_accessor :raw_data, :base_url, :subtitles
   
   def initialize
