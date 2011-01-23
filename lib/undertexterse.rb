@@ -47,9 +47,10 @@ class Undertexterse
         url = inner.attr('href')
         inner.content.empty? or url.nil? or ! url.match(/p=undertext&id=\d+/i)
       end.map do |y| 
-        y.attr('href') 
+        [y.attr('href'), y.content.strip]
       end.each_with_index do |value, index|
-        @block[index] << value
+        @block[index] << value.first
+        @block[index] << value.last
       end
     
       @block.map!{|value| value.reject(&:empty?)}
@@ -60,12 +61,13 @@ class Undertexterse
   
   def build!
     @block.each do |movie|
-      next unless movie.count == 4
+      next unless movie.count == 5
       @subtitles << Subtitle.new({
         :cds => movie[0].match(/\d+/)[0].to_i,
         :downloads => movie[1].match(/\d+$/)[0].to_i,
         :title => movie[2],
-        :url => movie[3]
+        :url => movie[3],
+        :movie_title => movie[4]
       })
     end
   end

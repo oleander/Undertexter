@@ -65,4 +65,16 @@ describe Undertexterse, "trying to search for a movie using a title" do
   it "should contain the right urls, again" do
     @use.each {|subtitle| subtitle.url.should match(/^http:\/\/www\.undertexter\.se\/\?p=undertext&id=\d+$/i)}
   end
+  
+  it "should have a movie title" do
+    @use.each {|subtitle| subtitle.movie_title.should match(/die hard/i)}
+  end
+  
+  it "should have a movie title that is not equal to the subtitle" do
+    @use.each {|subtitle| subtitle.movie_title.should_not eq(subtitle.title)}
+  end
+  
+  it "should not contain movie title that starts or ends with whitespace" do
+    @use.each {|subtitle| subtitle.movie_title.should_not match(/^\s+.+\s+$/)}
+  end
 end
