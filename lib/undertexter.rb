@@ -10,7 +10,8 @@ class Undertexter
       :language => {
         :swedish => 'soek',
         :english => 'eng_search'
-      }
+      },
+      :preferred_language => options[:language]
     }
     
     # If a non existing language is being used, swedish will be the default
@@ -79,7 +80,8 @@ class Undertexter
         :downloads => movie[1].match(/\d+$/)[0].to_i,
         :title => movie[2],
         :details => movie[3],
-        :movie_title => movie[4]
+        :movie_title => movie[4],
+        :language => @options[:preferred_language]
       })
     end
   end

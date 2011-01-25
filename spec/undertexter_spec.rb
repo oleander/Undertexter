@@ -91,15 +91,22 @@ end
 
 describe Undertexter, "should work when trying to fetch some english subtitles" do  
   it "should return at least 48 subtitles" do
-    Undertexter.should have_at_least(48).find("tt0840361", {:language => :english})
+    Undertexter.should have_at_least(48).find("tt0840361", :language => :english)
   end
   
   it "should return at least 8 subtitles" do
-    Undertexter.should have_at_least(8).find("tt0840361", {:language => :swedish})
+    Undertexter.should have_at_least(8).find("tt0840361", :language => :swedish)
   end
   
   it "should return at least 8 subtitles" do
-    Undertexter.should have_at_least(8).find("tt0840361", {:language => :strange})
+    Undertexter.should have_at_least(8).find("tt0840361", :language => :strange)
   end
-  # http://www.undertexter.se/www.php?www=http://engsub.net/?p=subtitle&id=92097
+  
+  it "should return the right url when trying to fetch an english sub" do
+    Undertexter.find("tt0840361", :language => :english).first.url.should match(/http:\/\/eng\.undertexter\.se\/subtitle\.php\?id=\d+/)
+  end
+  
+  it "should return the right url when trying to fetch an swedish sub" do
+    Undertexter.find("tt0840361", :language => :swedish).first.url.should match(/http:\/\/www\.undertexter\.se\/utext\.php\?id=\d+/)
+  end
 end

@@ -6,7 +6,7 @@ class Subtitle
   end
   
   def url
-    "http://www.undertexter.se/utext.php?id=#{id}"
+    @language == :english ? "http://eng.undertexter.se/subtitle.php?id=#{id}" : "http://www.undertexter.se/utext.php?id=#{id}"
   end
   
   private
