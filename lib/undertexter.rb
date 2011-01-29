@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 require 'rest-client'
 require 'subtitle'
 require 'nokogiri'

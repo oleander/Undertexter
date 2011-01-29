@@ -4,7 +4,7 @@ require "undertexter/version"
 
 Gem::Specification.new do |s|
   s.name        = "undertexter"
-  s.version     = Undertexter::VERSION
+  s.version     = "0.0.6"
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Linus Oleander"]
   s.email       = ["linus@oleander.nu"]
