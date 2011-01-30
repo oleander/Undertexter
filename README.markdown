@@ -50,6 +50,22 @@ You can also specify a destination folder to download the file, both relative an
     $ Undertexter.find("tt0840361").first.download!(:to => 'my_dir')
     => "/Users/linus/Downloads/my_dir/The.Town.2010.EXTENDED.480p.BRRip.XviD-NYDIC.rar"
     
+Find the right subtitle based on the release name of the movie
+    
+    $ Undertexter.find("tt0840361").based_on("The Town EXTENDED 2010 480p BRRip XviD AC3 FLAWL3SS")
+    => #<Subtitle:0x00000101b739d0 @cds=1, @downloads=1644, @title="The.Town.EXTENDED.2010.480p.BRRip.XviD.AC3-FLAWL3SS", @details="http://www.undertexter.se/?p=undertext&id=23752", @movie_title="The Town", @language=:swedish>
+    
+Specify how sensitive the `based_on` method should be, where `0` is a perfect match and `1` is dont care. Default is 0.4
+    
+    $ Undertexter.find("tt0840361").based_on("The Town EXTENDED 2010 480p BRRip XviD AC3 FLAWL3SS", limit: 0)
+    => nil
+    
+    $ Undertexter.find("tt0840361").based_on("The Town EXTENDED 2010 480p BRRip XviD AC3 FLAWL3SS", limit: 0.4)
+    => #<Subtitle:0x00000101b8d808 @cds=1, @downloads=1644, @title="The.Town.EXTENDED.2010.480p.BRRip.XviD.AC3-FLAWL3SS", @details="http://www.undertexter.se/?p=undertext&id=23752", @movie_title="The Town", @language=:swedish>
+    
+    $ Undertexter.find("tt0840361").based_on("The.Town.EXTENDED.2010.480p.BRRip.XviD.AC3-FLAWL3SS", limit: 0.0)
+    => #<Subtitle:0x00000101b8d718 @cds=1, @downloads=1644, @title="The.Town.EXTENDED.2010.480p.BRRip.XviD.AC3-FLAWL3SS", @details="http://www.undertexter.se/?p=undertext&id=23752", @movie_title="The Town", @language=:swedish>
+    
 If no language option is being passed to find, it will fall back to swedish
 
 What is being returned from the find method?
