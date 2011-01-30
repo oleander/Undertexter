@@ -26,7 +26,5 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  nokogiri
-  rest-client
   rspec
   undertexter!

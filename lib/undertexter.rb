@@ -3,6 +3,7 @@
 require 'rest-client'
 require 'subtitle'
 require 'nokogiri'
+require 'iconv'
 
 class Undertexter
   attr_accessor :raw_data, :base_details, :subtitles
@@ -49,7 +50,7 @@ class Undertexter
       @block = noko.css("table:nth-child(#{id}) td").to_a.reject do |inner| 
         inner.content.empty? or ! inner.content.match(/Nedladdningar/i) 
       end.map do |inner| 
-        inner.content.split("\n").map do |i| 
+        inner.content.split(/\n/).map do |i| 
           i.gsub(/"/, "").strip
         end
       end
@@ -90,5 +91,6 @@ class Undertexter
   
   def get(search_string)
     @raw_data = RestClient.get(@base_details + CGI.escape(search_string), :timeout => 10) rescue nil
+    @raw_data = Iconv.conv('utf-8','ISO-8859-1', @raw_data)
   end
 end
