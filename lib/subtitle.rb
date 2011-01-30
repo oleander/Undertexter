@@ -22,7 +22,7 @@ class Subtitle
       file_name = "#{dir}/#{generate_file_name}"
     end
     
-    data = RestClient.get(self.url, :timeout => 10) # rescue nil
+    data = RestClient.get(self.url, :timeout => 10) rescue nil
     file = File.new(file_name, 'w')
     file.write(data)
     file.close
@@ -60,6 +60,6 @@ class Subtitle
       args[:to] = File.expand_path(args[:to]) unless args[:to].match(/^\//)
 
       # Makes sure that every directory structure looks the same
-      Dir.new(args[:to]).path # rescue nil
+      Dir.new(args[:to]).path
     end
 end

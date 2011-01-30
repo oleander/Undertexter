@@ -33,6 +33,23 @@ You can also provide an language option.
     $ Undertexter.find("tt0840361", :language => :swedish).count
     => 8
 
+Download the subtitle to disk
+
+    $ Undertexter.find("tt0840361").first.download!
+    => "/tmp/The.Town.2010.EXTENDED.480p.BRRip.XviD-NYDIC.rar"
+    $ File.exists?("/tmp/The.Town.2010.EXTENDED.480p.BRRip.XviD-NYDIC.rar")
+    => true
+    
+You can also specify a destination folder to download the file, both relative and absolute
+    
+    $ Undertexter.find("tt0840361").first.download!(:to => /some/dir)
+    => "/some/dir/The.Town.2010.EXTENDED.480p.BRRip.XviD-NYDIC.rar"
+    
+    $ Dir.pwd
+    => /Users/linus/Downloads
+    $ Undertexter.find("tt0840361").first.download!(:to => 'my_dir')
+    => "/Users/linus/Downloads/my_dir/The.Town.2010.EXTENDED.480p.BRRip.XviD-NYDIC.rar"
+    
 If no language option is being passed to find, it will fall back to swedish
 
 What is being returned from the find method?
