@@ -4,6 +4,7 @@ require 'rest-client'
 require 'subtitle'
 require 'nokogiri'
 require 'iconv'
+require 'undertexter/array'
 
 class Undertexter
   attr_accessor :raw_data, :base_details, :subtitles
