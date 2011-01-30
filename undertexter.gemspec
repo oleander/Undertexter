@@ -20,5 +20,6 @@ Gem::Specification.new do |s|
   
   s.add_dependency('rest-client')
   s.add_dependency('nokogiri')
+  s.add_dependency('mimer_plus')
   s.add_development_dependency('rspec')
 end

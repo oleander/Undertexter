@@ -1,7 +1,8 @@
 PATH
   remote: .
   specs:
-    undertexter (0.0.6)
+    undertexter (0.0.7)
+      mimer_plus
       nokogiri
       rest-client
 
@@ -10,6 +11,7 @@ GEM
   specs:
     diff-lcs (1.1.2)
     mime-types (1.16)
+    mimer_plus (0.0.4)
     nokogiri (1.4.4)
     rest-client (1.6.1)
       mime-types (>= 1.16)
@@ -26,5 +28,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  mimer_plus
+  nokogiri
+  rest-client
   rspec
   undertexter!
