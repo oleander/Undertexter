@@ -30,4 +30,14 @@ describe Array do
   it "should return nil if trying to fetch an non existing imdb id" do
     Undertexter.find("tt123456789").based_on("some random argument").should be_nil
   end
+  
+  it "should raise an exception when the array does not contain any subtitle objects" do
+    lambda {
+      [1,2,2,3].based_on("some args")
+    }.should raise_error(NoMethodError)
+  end
+  
+  it "should be an array" do
+    @subtitles.should be_an_instance_of(Array)
+  end
 end
