@@ -40,4 +40,12 @@ describe Array do
   it "should be an array" do
     @subtitles.should be_an_instance_of(Array)
   end
+  
+  it "should return nil due to the release date {S09E12}" do
+    Undertexter.find("tt0313043").based_on("CSI.Miami.S09E12.HDTV.XviD-LOL").should be_nil
+  end
+  
+  it "should not return anything due to the wrong year" do
+    @subtitles.based_on("The Town EXTENDED 1999 480p BRRip XviD AC3 FLAWL3SS").should be_nil
+  end
 end
