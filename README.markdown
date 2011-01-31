@@ -1,4 +1,4 @@
-# Undertexter - *means subtitle in Swedish*
+# Undertexter
 ## What is Undertexter?
 
 Undertexter provides a basic search client that makes it possible to search for swedish and english subtitles on [Undertexter.se](http://undertexter.se)
