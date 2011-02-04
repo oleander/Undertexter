@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    undertexter (0.1.1)
+    undertexter (0.1.2)
       levenshteinish
       mimer_plus
       nokogiri
@@ -32,5 +32,9 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  levenshteinish
+  mimer_plus
+  nokogiri
+  rest-client
   rspec
   undertexter!

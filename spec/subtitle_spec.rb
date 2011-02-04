@@ -24,7 +24,7 @@ describe Subtitle do
     @subtitle.cds.should eq(1)
     @subtitle.title.should eq("127 Hours 2010 DVDSCR XViD-MC8")
     @subtitle.movie_title.should eq("127 Hours (127 Timmar)")
-    @subtitle.url.should eq("http://www.undertexter.se/utext.php?id=23984")
+    @subtitle.url.should eq("http://undertexter.se/laddatext.php?id=23984")
   end
   
   it "should be able to download the subtitle" do

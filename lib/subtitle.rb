@@ -9,7 +9,7 @@ class Subtitle
   end
   
   def url
-    @language == :english ? "http://eng.undertexter.se/subtitle.php?id=#{id}" : "http://www.undertexter.se/utext.php?id=#{id}"
+    @language == :english ? "http://eng.undertexter.se/subtitle.php?id=#{id}" : "http://undertexter.se/laddatext.php?id=#{id}"
   end
   
   # Downloading the file and saves it disk
