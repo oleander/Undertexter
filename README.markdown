@@ -60,7 +60,7 @@ This is how to use it in `irb`.
     $ Undertexter.find("tt0840361").based_on("The Town EXTENDED 2010 480p BRRip XviD AC3 FLAWL3SS")
     => #<Subtitle:0x00000101b739d0 @cds=1, @downloads=1644, @title="The.Town.EXTENDED.2010.480p.BRRip.XviD.AC3-FLAWL3SS", @details="http://www.undertexter.se/?p=undertext&id=23752", @movie_title="The Town", @language=:swedish>
     
-### Specify how sensitive the `based_on` method should be, from `0.0` to `1.1`
+### Specify how sensitive the `based_on` method should be, from `0.0` to `1.0`
     
     $ Undertexter.find("tt0840361").based_on("The Town EXTENDED 2010 480p BRRip XviD AC3 FLAWL3SS", limit: 0.0)
     => nil
@@ -114,4 +114,4 @@ Add `gem 'undertexter'` to your Gemfile and run `bundle`.
 
 ## Requirements
 
-Undertexter is tested in OS X 10.6.6 using Ruby 1.8.7.
+Undertexter is tested on OS X 10.6.6 using Ruby 1.8.7 and 1.9.2.

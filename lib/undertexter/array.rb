@@ -1,5 +1,7 @@
 require 'levenshteinish'
 
+# str =~ /(s\d{2}e\d{2})/i && !(str =~ /#{$1}/i)
+
 class Array
   def based_on(string, args = {})    
     result = self.any? ? self.map do|s|
