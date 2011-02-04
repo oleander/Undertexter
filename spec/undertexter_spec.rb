@@ -62,7 +62,7 @@ describe Undertexter, "trying to search for a movie using a title" do
     @use.each{|subtitle| subtitle.title.should match(/die.*hard/i)}
   end
   
-  it "should contain the right detailss, again" do
+  it "should contain the right details, again" do
     @use.each {|subtitle| subtitle.details.should match(/^http:\/\/www\.undertexter\.se\/\?p=undertext&id=\d+$/i)}
   end
   
@@ -76,10 +76,6 @@ describe Undertexter, "trying to search for a movie using a title" do
   
   it "should not contain movie title that starts or ends with whitespace" do
     @use.each {|subtitle| subtitle.movie_title.should_not match(/^\s+.+\s+$/)}
-  end
-  
-  it "should return a direct link to the subtitle" do
-    @use.each{|subtitle| subtitle.url.should match(/http:\/\/www\.undertexter\.se\/utext\.php\?id=\d+/i)}
   end
   
   it "should return the same id for every link" do
@@ -103,10 +99,10 @@ describe Undertexter, "should work when trying to fetch some english subtitles" 
   end
   
   it "should return the right url when trying to fetch an english sub" do
-    Undertexter.find("tt0840361", :language => :english).first.url.should match(/http:\/\/eng\.undertexter\.se\/subtitle\.php\?id=\d+/)
+    Undertexter.find("tt0840361", :language => :english).first.url.should match(/http:\/\/eng\.undertexter\.se\/subtitle\.php\?id=\d+/i)
   end
   
   it "should return the right url when trying to fetch an swedish sub" do
-    Undertexter.find("tt0840361", :language => :swedish).first.url.should match(/http:\/\/www\.undertexter\.se\/utext\.php\?id=\d+/)
+    Undertexter.find("tt0840361", :language => :swedish).first.url.should match(/http:\/\/undertexter\.se\/laddatext\.php\?id=\d+/i)
   end
 end
