@@ -1,4 +1,0 @@
-[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m
-
-Finished in 1.82 seconds
-[32m6 examples, 0 failures[0m
