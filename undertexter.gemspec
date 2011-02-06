@@ -19,7 +19,11 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
   
   s.add_dependency('rest-client')
-  s.add_dependency('nokogiri')
+  
+  # Using hpricot 0.8.2 due to a bug
+  # https://github.com/hpricot/hpricot/issues/#issue/33
+  
+  s.add_dependency('hpricot', '0.8.2')
   s.add_dependency('mimer_plus')
   s.add_dependency('levenshteinish')
   s.add_development_dependency('rspec')

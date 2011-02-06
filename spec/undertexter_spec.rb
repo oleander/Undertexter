@@ -58,8 +58,8 @@ describe Undertexter, "trying to search for a movie using a title" do
     Undertexter.should have_at_least(41).find("die hard")
   end
   
-  it "should return the right title, again" do
-    @use.each{|subtitle| subtitle.title.should match(/die.*hard/i)}
+  it "should have 6 die hard movies that does not contain any title" do
+    @use.reject{|subtitle| ! subtitle.title.empty?}.count.should be(6)
   end
   
   it "should contain the right details, again" do
@@ -81,6 +81,14 @@ describe Undertexter, "trying to search for a movie using a title" do
   it "should return the same id for every link" do
     @use.each_with_index do |subtitle, index|
       subtitle.url.match(/id=(\d+)/)[1].should eq(@use[index].details.match(/id=(\d+)/)[1])
+    end
+  end
+  
+  it "should not contain any attributes that contain any html tags" do
+    @use.each do |subtitle|
+      [:details, :downloads, :cds, :title, :movie_title, :url].each do |method|
+        subtitle.send(method).to_s.should_not match(/<\/?[^>]*>/)
+      end
     end
   end
 end

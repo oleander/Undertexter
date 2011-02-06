@@ -2,9 +2,21 @@
 
 require 'rest-client'
 require 'subtitle'
-require 'nokogiri'
+require 'hpricot'
 require 'iconv'
 require 'undertexter/array'
+
+module Hpricot
+
+  # Monkeypatch to fix an Hpricot bug that causes HTML entities to be decoded
+  # incorrectly.
+  def self.uxs(str)
+    str.to_s.
+      gsub(/&(\w+);/) { [Hpricot::NamedCharacters[$1] || ??].pack("U*") }.
+      gsub(/\&\#(\d+);/) { [$1.to_i].pack("U*") }
+  end
+
+end
 
 class Undertexter
   attr_accessor :raw_data, :base_details, :subtitles
@@ -42,37 +54,39 @@ class Undertexter
   end
   
   def parse!
-    noko = Nokogiri::HTML(@raw_data)
-    
     # Example output
-    # [["(1 cd)", "Nedladdningar: 11891", "Avatar (2009) PROPER DVDSCR XviD-MAXSPEED", "http://www.undertexter.se/?p=undertext&id=19751"]]
+    # [["(1 cd)", "Nedladdningar: 11891", "Avatar (2009) PROPER DVDSCR XviD-MAXSPEED", "http://www.undertexter.se/?p=undertext&id=19751", "Avatar"]]
     
-    [12,15].each do |id|
-      @block = noko.css("table:nth-child(#{id}) td").to_a.reject do |inner| 
-        inner.content.empty? or ! inner.content.match(/Nedladdningar/i) 
-      end.map do |inner| 
-        inner.content.split(/\n/).map do |i| 
-          i.gsub(/"/, "").strip
-        end
-      end
-      
-      next if @block.nil?
-      
-      noko.css("table:nth-child(#{id}) a").to_a.reject do |inner| 
-        details = inner.attr('href')
-        inner.content.empty? or details.nil? or ! details.match(/(p=undertext&id=\d+)|(p=subtitle&id=\d+)/i)
-      end.map do |y| 
-        [y.attr('href'), y.content.strip]
-      end.reject do |list|
-        list.last.empty?
-      end.each_with_index do |value, index|
-        @block[index] << value.first
-        @block[index] << value.last
-      end
+    doc = Hpricot(@raw_data)
+    @block = []
     
-      @block.map!{|value| value.reject(&:empty?)}
-      
-      break if @block.any?
+    # Trying to find the {tbody} that does not contain any tbody's
+    tbody = doc.search("tbody").to_a.reject do |inner, index|
+      not inner.inner_html.match(/Nedladdningar/i)
+    end.sort_by do |inner| 
+      inner.search('tbody').count 
+    end.first
+    
+    # Nothing found, okey!
+    return if tbody.nil?
+    
+    tbody = tbody.search('tr').drop(3)
+    
+    tbody.each_with_index do |value, index|
+      next unless index % 3 == 0
+      length = @block.length
+      @block[length] = [] if @block[length].nil?
+
+      line = tbody[index + 1].inner_html.split('<br />').map(&:strip)
+      value = value.search('a')
+
+      @block[length] << line[0]
+      @block[length] << line[2]
+      @block[length] << line[4]
+      @block[length] << value.last.attributes['href']
+      @block[length] << value.last.attributes['title']
+
+      @block[length].map! {|i| i.gsub(/<\/?[^>]*>/, "").strip}
     end
   end
   
