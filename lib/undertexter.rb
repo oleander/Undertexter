@@ -2,21 +2,9 @@
 
 require 'rest-client'
 require 'subtitle'
-require 'hpricot'
+require 'nokogiri'
 require 'iconv'
 require 'undertexter/array'
-
-module Hpricot
-
-  # Monkeypatch to fix an Hpricot bug that causes HTML entities to be decoded
-  # incorrectly.
-  def self.uxs(str)
-    str.to_s.
-      gsub(/&(\w+);/) { [Hpricot::NamedCharacters[$1] || ??].pack("U*") }.
-      gsub(/\&\#(\d+);/) { [$1.to_i].pack("U*") }
-  end
-
-end
 
 class Undertexter
   attr_accessor :raw_data, :base_details, :subtitles
@@ -57,36 +45,33 @@ class Undertexter
     # Example output
     # [["(1 cd)", "Nedladdningar: 11891", "Avatar (2009) PROPER DVDSCR XviD-MAXSPEED", "http://www.undertexter.se/?p=undertext&id=19751", "Avatar"]]
     
-    doc = Hpricot(@raw_data)
+    doc = Nokogiri::HTML(@raw_data)
     @block = []
     
     # Trying to find the {tbody} that does not contain any tbody's
-    tbody = doc.search("tbody").to_a.reject do |inner, index|
-      not inner.inner_html.match(/Nedladdningar/i)
+    tbody = doc.css("tbody").to_a.reject do |inner, index|
+      not inner.content.match(/Nedladdningar/i)
     end.sort_by do |inner| 
-      inner.search('tbody').count 
+      inner.css('tbody').count 
     end.first
     
     # Nothing found, okey!
     return if tbody.nil?
     
-    tbody = tbody.search('tr').drop(3)
+    tbody = tbody.css('tr').drop(3)
     
     tbody.each_with_index do |value, index|
       next unless index % 3 == 0
       length = @block.length
       @block[length] = [] if @block[length].nil?
-
-      line = tbody[index + 1].inner_html.split('<br />').map(&:strip)
-      value = value.search('a')
-
-      @block[length] << line[0]
-      @block[length] << line[2]
+      line = tbody[index + 1].content.split(/\n/).map(&:strip)
+      value = value.css('a')
+      @block[length] << line[1]
+      @block[length] << line[3]
       @block[length] << line[4]
-      @block[length] << value.last.attributes['href']
-      @block[length] << value.last.attributes['title']
-
-      @block[length].map! {|i| i.gsub(/<\/?[^>]*>/, "").strip}
+      @block[length] << value.last.attr('href')
+      @block[length] << value.last.attr('title')
+      @block[length].map!(&:strip)
     end
   end
   

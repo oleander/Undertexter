@@ -1,10 +1,10 @@
 PATH
   remote: .
   specs:
-    undertexter (0.1.3)
-      hpricot (= 0.8.2)
+    undertexter (0.1.4)
       levenshteinish
       mimer_plus
+      nokogiri
       rest-client
 
 GEM
@@ -12,11 +12,11 @@ GEM
   specs:
     diff-lcs (1.1.2)
     hintable_levenshtein (0.0.3)
-    hpricot (0.8.2)
     levenshteinish (0.0.1)
       hintable_levenshtein
     mime-types (1.16)
     mimer_plus (0.0.4)
+    nokogiri (1.4.4)
     rest-client (1.6.1)
       mime-types (>= 1.16)
     rspec (2.4.0)
