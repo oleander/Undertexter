@@ -1,4 +1,6 @@
 require 'spec_helper'
+include Container
+
 describe Subtitle do
   before(:each) do
     @title = "127 Hours 2010 DVDSCR XViD-MC8"
