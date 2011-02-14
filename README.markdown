@@ -3,7 +3,7 @@
 
 Undertexter provides a basic search client that makes it possible to search for swedish and english subtitles on [Undertexter.se](http://undertexter.se)
 
-*Support for other subtitles sites will be added in the future. Follow this project to know when*
+*Support for other subtitles sites will be added in the future. Follow this project to know when.*
 
 ## How to use
 
@@ -16,7 +16,7 @@ This is how to use it in `irb`.
     # => true
     
     $ subtite = Undertexter.find("tt0840361").first
-    => #<Subtitle:0x1020fff98 @downloads=8328, @movie_title="The Town", @title="The.Town.2010....BRRip", @url="http://www.undertexter.se/?p=undertext&id=23711", @cds=1>
+    => #<Container::Subtitle:0x1020fff98 @downloads=8328, @movie_title="The Town", @title="The.Town.2010....BRRip", @url="http://www.undertexter.se/?p=undertext&id=23711", @cds=1>
     $ subtitle.downloads
     => 8328
     $ subtitle.movie_title
@@ -58,7 +58,7 @@ This is how to use it in `irb`.
 ### Find the right subtitle based on the **release name** of the movie
     
     $ Undertexter.find("tt0840361").based_on("The Town EXTENDED 2010 480p BRRip XviD AC3 FLAWL3SS")
-    => #<Subtitle:0x00000101b739d0 @cds=1, @downloads=1644, @title="The.Town.EXTENDED.2010.480p.BRRip.XviD.AC3-FLAWL3SS", @details="http://www.undertexter.se/?p=undertext&id=23752", @movie_title="The Town", @language=:swedish>
+    => #<Container::Subtitle:0x00000101b739d0 @cds=1, @downloads=1644, @title="The.Town.EXTENDED.2010.480p.BRRip.XviD.AC3-FLAWL3SS", @details="http://www.undertexter.se/?p=undertext&id=23752", @movie_title="The Town", @language=:swedish>
     
 ### Specify how sensitive the `based_on` method should be, from `0.0` to `1.0`
     
@@ -66,14 +66,14 @@ This is how to use it in `irb`.
     => nil
     
     $ Undertexter.find("tt0840361").based_on("The Town EXTENDED 2010 480p BRRip XviD AC3 FLAWL3SS", limit: 0.4)
-    => #<Subtitle:0x00000101b8d808 @cds=1, @downloads=1644, @title="The.Town.EXTENDED.2010.480p.BRRip.XviD.AC3-FLAWL3SS", @details="http://www.undertexter.se/?p=undertext&id=23752", @movie_title="The Town", @language=:swedish>
+    => #<Container::Subtitle:0x00000101b8d808 @cds=1, @downloads=1644, @title="The.Town.EXTENDED.2010.480p.BRRip.XviD.AC3-FLAWL3SS", @details="http://www.undertexter.se/?p=undertext&id=23752", @movie_title="The Town", @language=:swedish>
     
     $ Undertexter.find("tt0840361").based_on("The.Town.EXTENDED.2010.480p.BRRip.XviD.AC3-FLAWL3SS", limit: 0.0)
-    => #<Subtitle:0x00000101b8d718 @cds=1, @downloads=1644, @title="The.Town.EXTENDED.2010.480p.BRRip.XviD.AC3-FLAWL3SS", @details="http://www.undertexter.se/?p=undertext&id=23752", @movie_title="The Town", @language=:swedish>
+    => #<Container::Subtitle:0x00000101b8d718 @cds=1, @downloads=1644, @title="The.Town.EXTENDED.2010.480p.BRRip.XviD.AC3-FLAWL3SS", @details="http://www.undertexter.se/?p=undertext&id=23752", @movie_title="The Town", @language=:swedish>
 
 ## What is being returned?
 
-The find method returns an `Array` with zero or more subtitles. Every subtitle provides some basic accessors.
+The find method returns an `Array` with zero or more `Container::Subtitle` instances. Every object provides some basic accessors.
 
 - `movie_title` (String) The official name of the movie.
 - `cds` (Integer) The amount of cds that the release should contain.
