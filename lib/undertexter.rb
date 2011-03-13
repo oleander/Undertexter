@@ -48,29 +48,27 @@ class Undertexter
     doc = Nokogiri::HTML(@raw_data)
     @block = []
     
-    # Trying to find the {tbody} that does not contain any tbody's
-    tbody = doc.css("tbody").to_a.reject do |inner, index|
-      not inner.content.match(/Nedladdningar/i)
+    tbody = doc.css("table").to_a.reject do |i| 
+      ! i.content.match(/Nedladdningar/i) or i.css('table').any?
     end.sort_by do |inner| 
-      inner.css('tbody').count 
+      inner.css('table').count 
     end.first
     
-    # Nothing found, okey!
     return if tbody.nil?
     
-    tbody = tbody.css('tr').drop(3)
-    
-    tbody.each_with_index do |value, index|
-      next unless index % 3 == 0
+    tbody = tbody.css("tr").select do |tr|
+      tr.to_s.match(/id=\d+/)  or tr.to_s.match(/Nedladdningar/i)
+    end.each_slice(2) do |first, last|
       length = @block.length
       @block[length] = [] if @block[length].nil?
-      line = tbody[index + 1].content.split(/\n/).map(&:strip)
-      value = value.css('a')
-      @block[length] << line[1]
-      @block[length] << line[3]
-      @block[length] << line[4]
-      @block[length] << value.last.attr('href')
-      @block[length] << value.last.attr('title')
+      line = last.content.split(/\n/).map(&:strip)
+      value = first.at_css('a')
+      
+      @block[length] << line[1]             # (cd 1)
+      @block[length] << line[3]             # Nedladdningar: 11891
+      @block[length] << line[4]             # "Avatar (2009) PROPER DVDSCR XviD-MAXSPEED"
+      @block[length] << value.attr('href')  # http://www.undertexter.se/?p=undertext&id=19751
+      @block[length] << value.attr('title') # Avatar
       @block[length].map!(&:strip)
     end
   end
