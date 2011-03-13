@@ -1,7 +1,7 @@
 require 'fileutils'
 require 'mimer_plus'
 
-module Container
+module SContainer
   class Subtitle
     attr_accessor :details, :downloads, :cds, :title, :movie_title, :url
   

@@ -76,7 +76,7 @@ class Undertexter
   def build!
     @block.each do |movie|
       next unless movie.count == 5
-      @subtitles << Container::Subtitle.new({
+      @subtitles << SContainer::Subtitle.new({
         :cds => movie[0].match(/\d+/)[0].to_i,
         :downloads => movie[1].match(/\d+$/)[0].to_i,
         :title => movie[2],

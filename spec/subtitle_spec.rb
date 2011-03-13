@@ -1,5 +1,5 @@
 require 'spec_helper'
-include Container
+include SContainer
 
 describe Subtitle do
   before(:each) do

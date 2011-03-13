@@ -84,8 +84,8 @@ describe Undertexter, "trying to search for a movie using a title" do
     end
   end
   
-  it "should only contain Container::Subtitle instances" do
-    @use.each { |subtitle| subtitle.should be_instance_of(Container::Subtitle) }
+  it "should only contain SContainer::Subtitle instances" do
+    @use.each { |subtitle| subtitle.should be_instance_of(SContainer::Subtitle) }
   end
   
   it "should not contain any attributes that contain any html tags" do
