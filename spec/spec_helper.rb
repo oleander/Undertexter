@@ -1,6 +1,10 @@
-require 'rspec'
-require "#{File.dirname(__FILE__)}/../lib/undertexter"
-require "#{File.dirname(__FILE__)}/../lib/subtitle"
+require "rspec"
+require "webmock/rspec"
+require "undertexter"
+require "subtitle"
+require "undertexter/error"
+
+WebMock.allow_net_connect!
 
 RSpec.configure do |config|
   config.mock_with :rspec

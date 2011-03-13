@@ -22,5 +22,7 @@ Gem::Specification.new do |s|
   s.add_dependency("nokogiri")
   s.add_dependency("mimer_plus")
   s.add_dependency("levenshteinish")
+  
   s.add_development_dependency("rspec", "2.4.0")
+  s.add_development_dependency("webmock")
 end

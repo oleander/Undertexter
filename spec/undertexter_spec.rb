@@ -118,3 +118,18 @@ describe Undertexter, "should work when trying to fetch some english subtitles" 
     Undertexter.find("tt0840361", :language => :swedish).first.url.should match(/http:\/\/undertexter\.se\/laddatext\.php\?id=\d+/i)
   end
 end
+
+describe "errors" do
+  before(:all) do
+    WebMock.disable_net_connect!
+  end
+  
+  it "should raise an error if the markup is changed" do
+    stub_request(:get, "http://www.undertexter.se/?p=soek&add=arkiv&str=tt0499549").to_return(:body => File.read("spec/fixtures/error.html"), :status => 200)
+    lambda { Undertexter.find("tt0499549") }.should raise_error(SourceHasBeenChangedError)
+  end
+  
+  after(:all) do
+    WebMock.allow_net_connect!
+  end
+end
