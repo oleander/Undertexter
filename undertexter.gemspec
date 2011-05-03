@@ -3,13 +3,13 @@ $:.push File.expand_path("../lib", __FILE__)
 
 Gem::Specification.new do |s|
   s.name        = "undertexter"
-  s.version     = "0.1.7"
+  s.version     = "0.1.8"
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Linus Oleander"]
   s.email       = ["linus@oleander.nu"]
   s.homepage    = "https://github.com/oleander/Undertexter"
-  s.summary     = %q{A subtitle search client for undertexter.se}
-  s.description = %q{A subtitle search client to search for swedish subtitles on undertexter.se}
+  s.summary     = %q{A basic API for Undertexter.se}
+  s.description = %q{A basic API for Undertexter.se.}
 
   s.rubyforge_project = "undertexter"
 
