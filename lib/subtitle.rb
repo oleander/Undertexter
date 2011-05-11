@@ -10,7 +10,11 @@ module SContainer
     end
   
     def url
-      @language == :english ? "http://eng.undertexter.se/subtitle.php?id=#{id}" : "http://undertexter.se/laddatext.php?id=#{id}"
+      if @language == :english
+        "http://eng.undertexter.se/subtitle.php?id=#{id}"
+      else
+        "http://undertexter.se/laddatext.php?id=#{id}"
+      end
     end
   
     # Downloading the file and saves it disk
@@ -49,7 +53,7 @@ module SContainer
   
     private
       def id
-        @details.match(/id=(\d+)/)[1]
+        @details.match(/^http:\/\/www\.undertexter\.se\/(\d+)\/$/)[1]
       end
     
       def generate_file_name
