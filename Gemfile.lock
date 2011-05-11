@@ -2,10 +2,10 @@ PATH
   remote: .
   specs:
     undertexter (0.1.9)
-      levenshteinish
-      mimer_plus
-      nokogiri
-      rest-client
+      levenshteinish (= 0.0.3)
+      mimer_plus (= 0.0.4)
+      nokogiri (= 1.4.4)
+      rest-client (= 1.6.1)
 
 GEM
   remote: http://rubygems.org/
@@ -40,5 +40,5 @@ PLATFORMS
 DEPENDENCIES
   rspec (= 2.4.0)
   undertexter!
-  vcr
-  webmock
+  vcr (= 1.9.0)
+  webmock (= 1.6.2)
