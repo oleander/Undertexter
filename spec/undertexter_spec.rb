@@ -107,20 +107,21 @@ end
 describe Undertexter, "should work when trying to fetch some english subtitles" do
   use_vcr_cassette "tt0840361"
   
-  it "should return at least 48 subtitles" do
-    Undertexter.should have_at_least(48).find("tt0840361", :language => :english)
-  end
-  
-  it "should return at least 8 subtitles" do
-    Undertexter.should have_at_least(8).find("tt0840361", :language => :swedish)
-  end
+  # Deactivated - for now
+  # 
+  # it "should return at least 48 subtitles" do
+  #   Undertexter.should have_at_least(48).find("tt0840361", :language => :english)
+  # end
+  # it "should return the right url when trying to fetch an english sub" do
+  #   Undertexter.find("tt0840361", :language => :english).first.url.should match(/http:\/\/eng\.undertexter\.se\/subtitle\.php\?id=\d+/i)
+  # end
   
   it "should return at least 8 subtitles" do
     Undertexter.should have_at_least(8).find("tt0840361", :language => :strange)
   end
   
-  it "should return the right url when trying to fetch an english sub" do
-    Undertexter.find("tt0840361", :language => :english).first.url.should match(/http:\/\/eng\.undertexter\.se\/subtitle\.php\?id=\d+/i)
+  it "should return at least 8 subtitles" do
+    Undertexter.should have_at_least(8).find("tt0840361", :language => :swedish)
   end
   
   it "should return the right url when trying to fetch an swedish sub" do

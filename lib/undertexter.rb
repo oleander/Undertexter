@@ -59,7 +59,8 @@ class Undertexter
     return if tbody.nil?
     
     tbody = tbody.css("tr").select do |tr|
-      tr.to_s.match(/http:\/\/www\.undertexter\.se\/\d+\//) or tr.to_s.match(/Nedladdningar/i)
+      tr.to_s.match(/http:\/\/www\.undertexter\.se\/\d+\//) or 
+      tr.to_s.match(/Nedladdningar/i)
     end.each_slice(2) do |first, last|
       length = @block.length
       @block[length] = [] if @block[length].nil?
