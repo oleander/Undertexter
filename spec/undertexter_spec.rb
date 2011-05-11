@@ -115,7 +115,7 @@ end
 describe Undertexter, "should work when trying to fetch some english subtitles" do
   use_vcr_cassette "tt0840361"
   
-  # Deactivated - for now
+  # Deactivated - for now - 2011-05-11
   # 
   # it "should return at least 48 subtitles" do
   #   Undertexter.should have_at_least(48).find("tt0840361", :language => :english)

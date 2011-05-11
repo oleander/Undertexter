@@ -27,7 +27,7 @@ module SContainer
         file_name = "#{dir}/#{generate_file_name}"
       end
     
-      data = RestClient.get(self.url, :timeout => 10) rescue nil
+      data = RestClient.get(self.url, :timeout => 10)
       file = File.new(file_name, 'w')
       file.write(data)
       file.close

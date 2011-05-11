@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe Array do
+  use_vcr_cassette "tt0840361"
+  
   before(:each) do
     @subtitles = Undertexter.find("tt0840361")
   end
@@ -12,7 +14,7 @@ describe Array do
   end
   
   it "should return the right one" do
-    @subtitles.based_on("The Town EXTENDED 2010 480p BRRip XviD AC3 FLAWL3SS").details.should match(/id=23752/)
+    @subtitles.based_on("The Town EXTENDED 2010 480p BRRip XviD AC3 FLAWL3SS").details.should match(/23752/)
   end
   
   it "should not return anything if the limit is set to low" do
@@ -24,7 +26,7 @@ describe Array do
   end
   
   it "should return the right instance" do
-    @subtitles.based_on("The Town EXTENDED 2010 480p BRRip XviD AC3 FLAWL3SS").should be_instance_of(Subtitle)
+    @subtitles.based_on("The Town EXTENDED 2010 480p BRRip XviD AC3 FLAWL3SS").should be_instance_of(SContainer::Subtitle)
   end
   
   it "should return nil if trying to fetch an non existing imdb id" do

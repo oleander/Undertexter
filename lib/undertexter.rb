@@ -96,7 +96,7 @@ class Undertexter
   end
   
   def get!
-    @raw_data = RestClient.get(url, :timeout => 10) rescue nil
+    @raw_data = RestClient.get(url, :timeout => 10)
     @raw_data = Iconv.conv("utf-8","ISO-8859-1", @raw_data)
   end
   
