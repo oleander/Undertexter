@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    undertexter (0.1.6)
+    undertexter (0.1.8)
       levenshteinish
       mimer_plus
       nokogiri
@@ -14,7 +14,7 @@ GEM
     crack (0.1.8)
     diff-lcs (1.1.2)
     hintable_levenshtein (0.0.3)
-    levenshteinish (0.0.1)
+    levenshteinish (0.0.3)
       hintable_levenshtein
     mime-types (1.16)
     mimer_plus (0.0.4)
@@ -29,6 +29,7 @@ GEM
     rspec-expectations (2.4.0)
       diff-lcs (~> 1.1.2)
     rspec-mocks (2.4.0)
+    vcr (1.9.0)
     webmock (1.6.2)
       addressable (>= 2.2.2)
       crack (>= 0.1.7)
@@ -39,4 +40,5 @@ PLATFORMS
 DEPENDENCIES
   rspec (= 2.4.0)
   undertexter!
+  vcr
   webmock
