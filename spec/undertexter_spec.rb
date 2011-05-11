@@ -104,6 +104,14 @@ describe Undertexter, "trying to search for a movie using a title" do
   end
 end
 
+describe "deactivated" do
+  it "should raise an error if trying to fetch an english subtitle" do
+    lambda { 
+      Undertexter.find("tt0840361", :language => :english)  
+    }.should raise_error(ArgumentError, "Support for english subtitles are deactivated - for now.")
+  end
+end
+
 describe Undertexter, "should work when trying to fetch some english subtitles" do
   use_vcr_cassette "tt0840361"
   

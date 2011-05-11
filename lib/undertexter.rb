@@ -27,6 +27,10 @@ class Undertexter
   end
   
   def self.find(search_string, options = {:language => :swedish})
+    if options[:language] == :english
+      raise ArgumentError.new("Support for english subtitles are deactivated - for now.")
+    end
+    
     this = self.new(options)
     this.search_string = search_string
     

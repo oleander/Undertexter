@@ -38,7 +38,9 @@ Undertexter.find("die hard").count
 
 ### Specify a language
 
-```` ruby    
+**Support for english subtitles are deactivated - for now. (2011-05-11)**
+
+```` ruby
 Undertexter.find("tt0840361", :language => :english).count
 # => 48
 
