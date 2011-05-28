@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    undertexter (0.1.9)
+    undertexter (0.1.10)
       levenshteinish (= 0.0.3)
       mimer_plus (= 0.0.4)
       nokogiri (= 1.4.4)
