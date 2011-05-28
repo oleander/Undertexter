@@ -70,9 +70,9 @@ class Undertexter
       @block[length] = [] if @block[length].nil?
       line = last.content.split(/\n/).map(&:strip)
       value = first.at_css("a")
-      @block[length] << line[1]             # (cd 1)
-      @block[length] << line[3]             # Nedladdningar: 11891
-      @block[length] << line[4]             # "Avatar (2009) PROPER DVDSCR XviD-MAXSPEED"
+      @block[length] << line[2]             # (cd 1)
+      @block[length] << line[4]             # Nedladdningar: 11891
+      @block[length] << line[5]             # "Avatar (2009) PROPER DVDSCR XviD-MAXSPEED"
       @block[length] << value.attr("href")  # http://www.undertexter.se/20534/
       @block[length] << value.attr("title") # Avatar
       @block[length].map!(&:strip)
