@@ -137,6 +137,15 @@ describe Undertexter, "should work when trying to fetch some english subtitles" 
   end
 end
 
+describe "bugs" do
+  context "tt0122933" do
+    use_vcr_cassette "tt0122933"
+    it "should find something" do
+      Undertexter.find("tt0122933").count.should_not be_zero
+    end
+  end
+end
+
 describe "errors" do
   before(:all) do
     WebMock.disable_net_connect!
